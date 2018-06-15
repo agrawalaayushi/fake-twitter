@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { Form, Button, Grid } from 'semantic-ui-react';
 import HeaderView from '../header/header-view';
 import FieldErrorView from '../common/error-view';
+import HomePage from '../home/home-view';
 
-class LoginView extends Component{
+class LoginPage extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -20,9 +21,17 @@ class LoginView extends Component{
 
 	handleSubmit(e){
 		e.preventDefault();    
-    const formValidationFeedback = this.handleFormValidation(this.state.fields);
+		const formValidationFeedback = this.handleFormValidation(this.state.fields);
+		debugger
     if(formValidationFeedback.isFormValid){
 			// Show home page
+			return(
+				<div>
+					<HomePage />
+					<Link to="/home" />
+				</div>
+			)
+			debugger
     }else{
       this.setState({errors:formValidationFeedback.errors});
     }
@@ -43,12 +52,21 @@ class LoginView extends Component{
 		let result = {};
 		if(fields['email'] === ''){
 			formIsValid = false;
-			errors['email'] = "Please provide your email"
+			errors['email'] = "Please provide your email";
+		}
+		else if(fields['email'] !== 'demo@xyz.com'){
+			formIsValid = false;
+			errors['email'] = "Email Id is not correct";
 		}
 		else if(fields['password'] === ''){
 			formIsValid = false;
-			errors['email'] = "Please provide your password"
+			errors['password'] = "Please provide your password";
 		}
+		else if(fields['password'] !== 'demo@123'){
+			formIsValid = false;
+			errors['password'] = "Password is not correct";
+		}
+
 		result['errors'] = errors;
 		result['isFormValid'] = formIsValid;
 		return result;
@@ -116,4 +134,4 @@ class LoginView extends Component{
 	}
 }
 
-export default LoginView;
+export default LoginPage;
