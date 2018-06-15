@@ -111,7 +111,7 @@ class LoginPage extends Component{
 						<div className='form-footer'>
 							<Grid  columns='equal'>
 								<Grid.Column width={16} className="right">
-									<Button className='app-btn blue-filled-btn' type='submit'>Sign In</Button>
+									<Button className='app-btn' type='submit'>Sign In</Button>
 								</Grid.Column>
 							</Grid>
 						</div>
