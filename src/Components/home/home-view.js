@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from '../../logo.svg';
 import '../../App.css';
 import TweetCardView from '../common/tweet-card-view/tweet-card-view';
+import RetweetModalView from '../modal/retweet-modal-view';
 import { Icon } from 'semantic-ui-react';
 
 
@@ -40,6 +41,9 @@ class HomePage extends Component {
   componentDidMount(){
   }
 
+  openRetweetModal(){
+    this.retweetModal.showRetweetModal();
+  }
   //-----------------------------------
   // Views
   //-----------------------------------
@@ -49,6 +53,7 @@ class HomePage extends Component {
       <TweetCardView
         key={index}
         tweetDetails={card}
+        openRetweetModalCallback = {() => this.openRetweetModal()}
       />
     )
   };
@@ -57,8 +62,6 @@ class HomePage extends Component {
     const { tweetsResponse } = this.state;
     return(
       <div className="position-relative">
-          <Icon fitted name='help' />
-
         {tweetsResponse.count > 0 ?
           <div className="tweet-card-wrp">
             { tweetsResponse.tweets.map((item, index) =>( this.getTweetCardView(item, index) )) }
@@ -77,6 +80,9 @@ class HomePage extends Component {
     return (
       <div className="App">
         {this.getTweets()}
+        <div className= "modal-wrapper">
+          <RetweetModalView  onRef={ref => (this.retweetModal = ref)} />
+        </div>
       </div>
     );
   }

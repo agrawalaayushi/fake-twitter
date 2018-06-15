@@ -8,13 +8,17 @@ class TweetCardView extends Component {
 		super(props);
 	}
 
+	openRetweetModal(){
+		this.props.openRetweetModalCallback();
+	}
+
   render() {
 		const { tweetDetails } = this.props;
     return (
-      <div className= "tweet-card fas fa-retweet">
-				<div className="tweet-card-header fas fa-retweet">
+      <div className= "tweet-card">
+				<div className="tweet-card-header">
 					<span>{tweetDetails.name}</span>
-					<img src={retweet} className="retweet-icon" alt="retweet" />
+					<Icon name="retweet"	onClick = {() => this.openRetweetModal()} />
 				</div>
 				<div><p>{tweetDetails.description}</p></div>		
       </div>
