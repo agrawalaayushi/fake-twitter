@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../logo.svg';
-import '../App.css';
+import '../App.scss';
 import LoginView from './auth-sign-in/login-view';
 
 class App extends Component {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory } from 'react-router';
 import 'semantic-ui-css/semantic.min.css';
 
-import './index.css';
+import './index.scss';
 import App from './Components/App';
 
 import registerServiceWorker from './registerServiceWorker';

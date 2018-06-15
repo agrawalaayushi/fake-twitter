@@ -9,11 +9,13 @@ class TweetCardView extends Component {
 	}
 
 	openRetweetModal(){
-		this.props.openRetweetModalCallback();
+		const { tweetDetails } = this.props;
+		this.props.openRetweetModalCallback(tweetDetails);
 	}
 
   render() {
 		const { tweetDetails } = this.props;
+		let description = tweetDetails.description;
     return (
       <div className= "tweet-card">
 				<div className="tweet-card-header">

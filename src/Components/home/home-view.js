@@ -41,8 +41,8 @@ class HomePage extends Component {
   componentDidMount(){
   }
 
-  openRetweetModal(){
-    this.retweetModal.showRetweetModal();
+  openRetweetModal(data){
+    this.retweetModal.showRetweetModal(data);
   }
   //-----------------------------------
   // Views
@@ -53,7 +53,7 @@ class HomePage extends Component {
       <TweetCardView
         key={index}
         tweetDetails={card}
-        openRetweetModalCallback = {() => this.openRetweetModal()}
+        openRetweetModalCallback = {(data) => this.openRetweetModal(data)}
       />
     )
   };

@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import '../../App.css';
-import { Button, Icon, Modal } from 'semantic-ui-react'
+import '../../App.scss';
+import { Button, Icon, Modal, Input} from 'semantic-ui-react'
 
 class RetweetModalView extends Component {
   constructor(props){
     super(props); 
     this.state={
 			open: false,
-			isError: false,
+      isError: false,
+      tweet: "",
 		}
 		this.close = this.close.bind(this);
 	}
@@ -23,10 +24,11 @@ class RetweetModalView extends Component {
 		});
 	}
 
-	showRetweetModal(){
+	showRetweetModal(tweet){
     // recieve previous tweet here
 		this.setState({ 
       open: true,
+      tweet: tweet,
 		});
   }
   
@@ -34,25 +36,28 @@ class RetweetModalView extends Component {
   // Views
   //-----------------------------------
 	addCommentView(){
-
+    return(
+      <Input placeholder="Add a comment"/>
+    )
 	}
 
-	tweetDescription(){
-
+	tweetDescription(data){
+    return(
+      <p>{data.description}</p>
+    )
 	}
 
 	getModalView(){
-    const { open } = this.state;
+    const { open, tweet } = this.state;
     return(
-      <Modal className='retweet-modal' size='tiny' open={open} onClose={this.close}>
+      <Modal className='retweet-modal' size='tiny' open={open} closeIcon onClose={this.close}>
         <Modal.Header>
 					<div className='heading'>Retweet this to your followers? </div>
-          <div className='icon-close close-btn' onClick={this.close}></div>
         </Modal.Header>
         <Modal.Content>
           <div className="modal-content-header">
 						{this.addCommentView()}
-            {this.tweetDescription()}
+            {this.tweetDescription(tweet)}
           </div>
         </Modal.Content>
 				<Modal.Actions>
