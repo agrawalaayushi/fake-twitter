@@ -8,8 +8,8 @@ class HomePage extends Component {
   }
 
   componentDidMount(){
-    console.log("coming here")
   }
+  
   render() {
     return (
       <div className="App">
