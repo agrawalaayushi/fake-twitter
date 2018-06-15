@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import logo from '../../logo.svg';
 import '../../App.css';
 import TweetCardView from '../common/tweet-card-view/tweet-card-view';
+import { Icon } from 'semantic-ui-react';
+
 
 class HomePage extends Component {
   constructor(props){
@@ -55,6 +57,8 @@ class HomePage extends Component {
     const { tweetsResponse } = this.state;
     return(
       <div className="position-relative">
+          <Icon fitted name='help' />
+
         {tweetsResponse.count > 0 ?
           <div className="tweet-card-wrp">
             { tweetsResponse.tweets.map((item, index) =>( this.getTweetCardView(item, index) )) }

@@ -26,11 +26,20 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-.tweet-card-wrp{
+.tweet-card{
   width: 300px;
   height: 100px;
   border: solid;
   padding: 9px 12px;
   margin: 10px;
   border: 1px solid #e6ecf0;
+}
+.tweet-card-header{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.retweet-icon{
+  width: 20px;
+  height: 20px;
 }
