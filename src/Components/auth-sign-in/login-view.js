@@ -13,28 +13,27 @@ class LoginPage extends Component{
         email: '',
         password: ''
       },
-      errors: {},
+			errors: {},
+			isLoggedIn: false,
 		}
 		this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	redirectToHomePage(){
+		return(
+			<HomePage />
+		)
+	}
+
 	handleSubmit(e){
 		e.preventDefault();    
 		const formValidationFeedback = this.handleFormValidation(this.state.fields);
-		debugger
     if(formValidationFeedback.isFormValid){
-			// Show home page
-			return(
-				<div>
-					<HomePage />
-					<Link to="/home" />
-				</div>
-			)
-			debugger
+			this.setState({isLoggedIn : true});
     }else{
       this.setState({errors:formValidationFeedback.errors});
-    }
+    }	
   }
 
   handleChange(field, e){
@@ -122,15 +121,21 @@ class LoginPage extends Component{
 		)
 	}
 
+	
 	render(){
-		return(
-			<div>
-			<HeaderView />
-			<div className='login-view'>
-				{ this.getLoginFormView() }
-			</div>
-		</div>
-		)
+		if (this.state.isLoggedIn) {
+			return this.redirectToHomePage();
+		}
+		else{
+			return(
+				<div>
+					<HeaderView />
+					<div className='login-view'>
+						{ this.getLoginFormView() }
+					</div>
+				</div>
+			)
+		}
 	}
 }
 
