@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Form, Button, Grid } from 'semantic-ui-react';
 import HeaderView from '../header/header-view';
 import FieldErrorView from '../common/error-view';
 import HomePage from '../home/home-view';
+
+const USER_EMAIL = "demo@xyz.com";
+const USER_PWD = "demo@123";
 
 class LoginPage extends Component{
 	constructor(props){
@@ -22,7 +24,7 @@ class LoginPage extends Component{
 
 	redirectToHomePage(){
 		return(
-			<HomePage />
+			<HomePage acountHolderDetails = {USER_EMAIL}/>
 		)
 	}
 
@@ -31,6 +33,7 @@ class LoginPage extends Component{
 		const formValidationFeedback = this.handleFormValidation(this.state.fields);
     if(formValidationFeedback.isFormValid){
 			this.setState({isLoggedIn : true});
+			this.props.history.push('/home');
     }else{
       this.setState({errors:formValidationFeedback.errors});
     }	
@@ -49,11 +52,13 @@ class LoginPage extends Component{
 		let errors = {};
 		let formIsValid = true;
 		let result = {};
+		let minPwdLength = 8;
+
 		if(fields['email'] === ''){
 			formIsValid = false;
 			errors['email'] = "Please provide your email";
 		}
-		else if(fields['email'] !== 'demo@xyz.com'){
+		else if(fields['email'] !== USER_EMAIL){
 			formIsValid = false;
 			errors['email'] = "Email Id is not correct";
 		}
@@ -61,7 +66,11 @@ class LoginPage extends Component{
 			formIsValid = false;
 			errors['password'] = "Please provide your password";
 		}
-		else if(fields['password'] !== 'demo@123'){
+		else if(fields['password'].length < minPwdLength){
+			formIsValid = false;
+			errors['password'] = "Minimum 8 characters required";
+		}
+		else if(fields['password'] !== USER_PWD){
 			formIsValid = false;
 			errors['password'] = "Password is not correct";
 		}
@@ -111,7 +120,7 @@ class LoginPage extends Component{
 						<div className='form-footer'>
 							<Grid  columns='equal'>
 								<Grid.Column width={16} className="right">
-									<Button className='app-btn' type='submit'>Sign In</Button>
+									<Button className='app-btn' type='submit'>Sign In</Button>							
 								</Grid.Column>
 							</Grid>
 						</div>
@@ -123,13 +132,14 @@ class LoginPage extends Component{
 
 	
 	render(){
+		let headerTitle = "Welcome to Fake Twitter";
 		if (this.state.isLoggedIn) {
 			return this.redirectToHomePage();
 		}
 		else{
 			return(
 				<div>
-					<HeaderView />
+					<HeaderView headerTitle = {headerTitle}/>
 					<div className='login-view'>
 						{ this.getLoginFormView() }
 					</div>
