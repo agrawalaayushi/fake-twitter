@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import '../../../App.css';
-import retweet from '../../../assets/image-icon/retweet-icon.png';
 import { Icon } from 'semantic-ui-react';
 
 class TweetCardView extends Component {

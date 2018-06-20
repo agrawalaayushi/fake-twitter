@@ -5,6 +5,9 @@ import HeaderView from '../header/header-view';
 import FieldErrorView from '../common/error-view';
 import HomePage from '../home/home-view';
 
+const USER_EMAIL = "demo@xyz.com";
+const USER_PWD = "demo@123";
+
 class LoginPage extends Component{
 	constructor(props){
 		super(props);
@@ -49,11 +52,21 @@ class LoginPage extends Component{
 		let errors = {};
 		let formIsValid = true;
 		let result = {};
+		let minPwdLength = 8;
+
 		if(fields['email'] === ''){
 			formIsValid = false;
 			errors['email'] = "Please provide your email";
 		}
-		else if(fields['email'] !== 'demo@xyz.com'){
+		else if(typeof fields["email"] !== "undefined"){
+      let lastAtPos = fields["email"].lastIndexOf('@');
+      let lastDotPos = fields["email"].lastIndexOf('.');
+      if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') === -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
+        formIsValid = false;
+        errors["email"] = "Email is not valid";
+      }
+		}
+		else if(fields['email'] !== USER_EMAIL){
 			formIsValid = false;
 			errors['email'] = "Email Id is not correct";
 		}
@@ -61,7 +74,11 @@ class LoginPage extends Component{
 			formIsValid = false;
 			errors['password'] = "Please provide your password";
 		}
-		else if(fields['password'] !== 'demo@123'){
+		else if(fields['password'].length < minPwdLength){
+			formIsValid = false;
+			errors['password'] = "Minimum 8 characters required";
+		}
+		else if(fields['password'] !== USER_PWD){
 			formIsValid = false;
 			errors['password'] = "Password is not correct";
 		}
