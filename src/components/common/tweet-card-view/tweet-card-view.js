@@ -12,8 +12,6 @@ class TweetCardView extends Component {
 
   render() {
 		const { tweetDetails } = this.props;
-
-		let description = tweetDetails.description;
     return (
       <div className= "tweet-card">
 				<div className="tweet-card-header">

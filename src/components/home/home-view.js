@@ -58,8 +58,6 @@ class HomePage extends Component {
   // To retweet the post on timline
   submitRetweet(data){
     const { tweetsResponse } = this.state;
-    let count = this.state.tweetsResponse.count;
-    let tweets  = this.state.tweetsResponse.tweets;
     let new_state = Object.assign({}, this.state); 
     let a = JSON.parse(JSON.stringify(new_state.tweetsResponse.tweets))
     a[tweetsResponse.count+1] = data[0];
