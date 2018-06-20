@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import { Form, Button, Grid } from 'semantic-ui-react';
 import HeaderView from '../header/header-view';
 import FieldErrorView from '../common/error-view';
@@ -25,7 +24,7 @@ class LoginPage extends Component{
 
 	redirectToHomePage(){
 		return(
-			<HomePage />
+			<HomePage acountHolderDetails = {USER_EMAIL}/>
 		)
 	}
 
@@ -34,6 +33,7 @@ class LoginPage extends Component{
 		const formValidationFeedback = this.handleFormValidation(this.state.fields);
     if(formValidationFeedback.isFormValid){
 			this.setState({isLoggedIn : true});
+			this.props.history.push('/home');
     }else{
       this.setState({errors:formValidationFeedback.errors});
     }	
@@ -57,14 +57,6 @@ class LoginPage extends Component{
 		if(fields['email'] === ''){
 			formIsValid = false;
 			errors['email'] = "Please provide your email";
-		}
-		else if(typeof fields["email"] !== "undefined"){
-      let lastAtPos = fields["email"].lastIndexOf('@');
-      let lastDotPos = fields["email"].lastIndexOf('.');
-      if (!(lastAtPos < lastDotPos && lastAtPos > 0 && fields["email"].indexOf('@@') === -1 && lastDotPos > 2 && (fields["email"].length - lastDotPos) > 2)) {
-        formIsValid = false;
-        errors["email"] = "Email is not valid";
-      }
 		}
 		else if(fields['email'] !== USER_EMAIL){
 			formIsValid = false;
@@ -128,7 +120,7 @@ class LoginPage extends Component{
 						<div className='form-footer'>
 							<Grid  columns='equal'>
 								<Grid.Column width={16} className="right">
-									<Button className='app-btn' type='submit'>Sign In</Button>
+									<Button className='app-btn' type='submit'>Sign In</Button>							
 								</Grid.Column>
 							</Grid>
 						</div>
@@ -140,13 +132,14 @@ class LoginPage extends Component{
 
 	
 	render(){
+		let headerTitle = "Welcome to Fake Twitter";
 		if (this.state.isLoggedIn) {
 			return this.redirectToHomePage();
 		}
 		else{
 			return(
 				<div>
-					<HeaderView />
+					<HeaderView headerTitle = {headerTitle}/>
 					<div className='login-view'>
 						{ this.getLoginFormView() }
 					</div>
